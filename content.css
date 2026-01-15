@@ -1,0 +1,751 @@
+/* ================================
+   REPID Extension Styles
+   Dark Theme / Glassmorphism
+   ================================ */
+
+.repid-widget-container,
+.repid-panel,
+.repid-toast {
+  --bg-header: #050508;
+  --bg: #0c0c14;
+  --bg-card: #14121f;
+  --bg-hover: #1c1a2a;
+  --primary: #2388FF;
+  --secondary: #4A3AFF;
+  --accent: #FEE140;
+  --text: #F8F3FF;
+  --text-dim: rgba(248, 243, 255, 0.6);
+  --text-muted: rgba(248, 243, 255, 0.35);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-hover: rgba(255, 255, 255, 0.25);
+  --positive: #2388FF;
+  --negative: #FF4466;
+  --glow: 0 0 20px rgba(255, 255, 255, 0.1);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --font-display: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================
+   Animations
+   ================================ */
+
+@keyframes repid-fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes repid-scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes repid-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(6, 6, 10, 0.6); }
+  50% { transform: scale(1.03); box-shadow: var(--glow), 0 4px 20px rgba(6, 6, 10, 0.6); }
+}
+
+@keyframes repid-slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ================================
+   Panel Container
+   ================================ */
+
+.repid-panel {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  width: 320px !important;
+  background: var(--bg) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 40px rgba(6, 6, 10, 0.7), var(--glow) !important;
+  overflow: hidden !important;
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  color: var(--text) !important;
+  opacity: 0 !important;
+  transform: scale(0.95) translateY(10px) !important;
+  pointer-events: none !important;
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+
+.repid-panel.open {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.repid-panel.dragging {
+  opacity: 0.85 !important;
+  transition: none !important;
+}
+
+/* Reset inside panel to avoid site style leaks */
+.repid-panel * {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* ================================
+   Header
+   ================================ */
+
+.repid-panel-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 16px !important;
+  background: var(--bg-header) !important;
+  border-bottom: 1px solid var(--border) !important;
+  cursor: grab !important;
+  gap: 12px !important;
+}
+
+.repid-panel-header:active {
+  cursor: grabbing !important;
+}
+
+.repid-header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.repid-header-logo {
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 6px !important;
+}
+
+.repid-header-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+}
+
+.repid-header-title {
+  font-family: var(--font-display) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  letter-spacing: 0.5px !important;
+}
+
+.repid-header-tagline {
+  font-size: 9px !important;
+  color: var(--text-muted) !important;
+  letter-spacing: 0.3px !important;
+}
+
+.repid-panel-close {
+  width: 28px !important;
+  height: 28px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease !important;
+  padding: 0 !important;
+}
+
+.repid-panel-close svg {
+  width: 14px !important;
+  height: 14px !important;
+  stroke-width: 2 !important;
+}
+
+.repid-panel-close:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+
+/* ================================
+   Profile Bar (Target Info)
+   ================================ */
+
+.repid-panel-profile-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 12px 16px !important;
+  background: var(--bg-header) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.repid-profile-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%) !important;
+  color: var(--text) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  flex-shrink: 0 !important;
+}
+
+.repid-profile-details {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+}
+
+.repid-profile-handle {
+  font-family: var(--font-display) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+  letter-spacing: 0.3px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.repid-profile-platform {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+  text-transform: capitalize !important;
+}
+
+.repid-platform-dot {
+  width: 5px !important;
+  height: 5px !important;
+  border-radius: 50% !important;
+  background: var(--positive) !important;
+  animation: repid-pulse-dot 2s ease-in-out infinite !important;
+}
+
+@keyframes repid-pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ================================
+   Body Area
+   ================================ */
+
+.repid-panel-body {
+  padding: 16px 18px !important;
+  max-height: 500px !important;
+  overflow-y: auto !important;
+  position: relative !important;
+}
+
+.repid-panel-body::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 18px !important;
+  right: 18px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(35, 136, 255, 0.3), transparent) !important;
+}
+
+/* ================================
+   Score / Stats
+   ================================ */
+
+.repid-score-section {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  padding: 18px 12px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  margin-bottom: 16px !important;
+}
+
+.repid-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  flex: 1 !important;
+  text-align: center !important;
+  padding: 8px 4px !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.repid-stat:hover {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.repid-stat-icon {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 2px !important;
+}
+
+.repid-stat-icon svg {
+  width: 16px !important;
+  height: 16px !important;
+  stroke-width: 2 !important;
+}
+
+.repid-stat-icon.score {
+  background: linear-gradient(135deg, rgba(254, 225, 64, 0.15), rgba(254, 225, 64, 0.05)) !important;
+  color: var(--accent) !important;
+}
+
+.repid-stat-icon.positive {
+  background: linear-gradient(135deg, rgba(35, 136, 255, 0.15), rgba(35, 136, 255, 0.05)) !important;
+  color: var(--positive) !important;
+}
+
+.repid-stat-icon.negative {
+  background: linear-gradient(135deg, rgba(255, 68, 102, 0.15), rgba(255, 68, 102, 0.05)) !important;
+  color: var(--negative) !important;
+}
+
+.repid-stat-value {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: var(--text) !important;
+}
+
+.repid-stat-label-text {
+  font-family: var(--font-display) !important;
+  font-size: 9px !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+/* ================================
+   Tagging Form
+   ================================ */
+
+.repid-form {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  padding: 18px !important;
+  margin-bottom: 16px !important;
+  position: relative !important;
+}
+
+.repid-form::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 18px !important;
+  right: 18px !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent) !important;
+}
+
+.repid-form-title {
+  font-family: var(--font-display) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: var(--text-dim) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 14px !important;
+}
+
+.repid-type-btns {
+  display: flex !important;
+  gap: 10px !important;
+  margin-bottom: 14px !important;
+}
+
+.repid-type-btn {
+  flex: 1 !important;
+  padding: 12px 16px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.repid-type-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--text-muted) !important;
+  stroke-width: 2 !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.repid-type-btn span {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  transition: color 0.2s ease !important;
+}
+
+.repid-type-btn:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-hover) !important;
+  transform: translateY(-2px) !important;
+}
+
+.repid-type-btn:hover svg,
+.repid-type-btn:hover span {
+  color: var(--text-dim) !important;
+}
+
+.repid-type-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.repid-type-btn.active {
+  border-color: var(--border-hover) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+.repid-type-btn.active svg,
+.repid-type-btn.active span {
+  color: var(--text) !important;
+}
+
+.repid-type-btn[data-type="positive"].active {
+  border-color: var(--positive) !important;
+  background: linear-gradient(135deg, rgba(35, 136, 255, 0.15), rgba(35, 136, 255, 0.05)) !important;
+}
+
+.repid-type-btn[data-type="positive"].active svg,
+.repid-type-btn[data-type="positive"].active span {
+  color: var(--positive) !important;
+}
+
+.repid-type-btn[data-type="negative"].active {
+  border-color: var(--negative) !important;
+  background: linear-gradient(135deg, rgba(255, 68, 102, 0.15), rgba(255, 68, 102, 0.05)) !important;
+}
+
+.repid-type-btn[data-type="negative"].active svg,
+.repid-type-btn[data-type="negative"].active span {
+  color: var(--negative) !important;
+}
+
+.repid-input {
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-size: 13px !important;
+  font-family: inherit !important;
+  resize: none !important;
+  margin-bottom: 12px !important;
+  transition: all 0.2s ease !important;
+}
+
+.repid-input:focus {
+  outline: none !important;
+  border-color: var(--border-hover) !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05) !important;
+}
+
+.repid-input::placeholder {
+  color: var(--text-muted) !important;
+}
+
+.repid-submit {
+  width: 100% !important;
+  padding: 16px 14px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, var(--primary) 0%, #1a6dd1 100%) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  line-height: 1.2 !important;
+}
+
+.repid-submit-text,
+.repid-submit-loading {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.repid-submit::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  transition: left 0.5s ease !important;
+}
+
+.repid-submit:hover:not(:disabled)::before {
+  left: 100% !important;
+}
+
+.repid-submit:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(35, 136, 255, 0.4) !important;
+}
+
+.repid-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+.repid-submit:disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  background: var(--bg-hover) !important;
+}
+
+/* ================================
+   Wallet Connect Prompt
+   ================================ */
+
+.repid-connect {
+  text-align: center !important;
+  padding: 24px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  margin-bottom: 16px !important;
+}
+
+.repid-connect p {
+  margin-bottom: 16px !important;
+  color: var(--text-dim) !important;
+  font-size: 13px !important;
+}
+
+.repid-connect-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 14px 28px !important;
+  border: none !important;
+  border-radius: 12px !important;
+  background: var(--primary) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  line-height: 1.2 !important;
+  min-height: 44px !important;
+}
+
+.repid-connect-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: var(--glow) !important;
+}
+
+/* ================================
+   Tag List / History
+   ================================ */
+
+.repid-tags {
+  max-height: 140px !important;
+  overflow-y: auto !important;
+}
+
+.repid-tags-title {
+  font-family: var(--font-display) !important;
+  font-size: 9px !important;
+  font-weight: 600 !important;
+  color: var(--text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 10px !important;
+}
+
+.repid-tag {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding: 12px 14px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+  border-left: 2px solid var(--text-muted) !important;
+}
+
+.repid-tag:last-child {
+  margin-bottom: 0 !important;
+}
+
+.repid-tag.positive {
+  border-left-color: var(--positive) !important;
+}
+
+.repid-tag.negative {
+  border-left-color: var(--negative) !important;
+}
+
+.repid-tag-icon {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
+  margin-top: 2px !important;
+}
+
+.repid-tag-icon.positive {
+  color: var(--positive) !important;
+}
+
+.repid-tag-icon.negative {
+  color: var(--negative) !important;
+}
+
+.repid-tag-content {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.repid-tag-text {
+  display: block !important;
+  font-size: 12px !important;
+  color: var(--text-dim) !important;
+  margin-bottom: 4px !important;
+  line-height: 1.4 !important;
+}
+
+.repid-tag-meta {
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+  font-family: 'SF Mono', monospace !important;
+}
+
+/* ================================
+   Toast Notifications
+   ================================ */
+
+.repid-toast {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(100px) !important;
+  padding: 14px 24px !important;
+  background: var(--primary) !important;
+  border-radius: 12px !important;
+  color: #fff !important;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  z-index: 2147483647 !important;
+  opacity: 0 !important;
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+  box-shadow: 0 8px 30px rgba(35, 136, 255, 0.3) !important;
+}
+
+.repid-toast.show,
+.repid-toast.repid-toast-show {
+  transform: translateX(-50%) translateY(0) !important;
+  opacity: 1 !important;
+}
+
+/* ================================
+   Utilities
+   ================================ */
+
+/* Hidden scrollbar */
+.repid-panel-body::-webkit-scrollbar,
+.repid-tags::-webkit-scrollbar {
+  width: 0 !important;
+  display: none !important;
+}
+
+.repid-panel-body,
+.repid-tags {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* ================================
+   Inline Action Button (e.g. on Twitter)
+   ================================ */
+
+.repid-inline-sign {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 6px 12px !important;
+  background: linear-gradient(135deg, #2388FF 0%, #1a6dd1 100%) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  vertical-align: middle !important;
+  box-shadow: 0 2px 6px rgba(35, 136, 255, 0.3) !important;
+  white-space: nowrap !important;
+  z-index: 9999 !important;
+  position: relative !important;
+  margin-left: 8px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  width: auto !important;
+  max-width: fit-content !important;
+  flex: none !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  min-width: 0 !important;
+}
+
+.repid-inline-sign svg {
+  width: 12px !important;
+  height: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.repid-inline-sign:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(35, 136, 255, 0.4) !important;
+}
+
+.repid-inline-sign:active {
+  transform: translateY(0) scale(0.98) !important;
+}
