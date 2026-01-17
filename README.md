@@ -4,11 +4,11 @@ Chrome extension for leaving verifiable reputation tags on social media profiles
 
 ## Features
 
--  Connect any Web3 wallet (MetaMask, Coinbase, Trust, etc.)
+-  Connect any Web3 wallet (MetaMask, Phantom)
 -  Leave positive, negative, or neutral reputation tags
 -  All tags are cryptographically signed
 -  View reputation scores on profiles
--  Supports: X (Twitter), GitHub, LinkedIn, YouTube, Reddit, Facebook
+-  Supports: X (Twitter), GitHub, LinkedIn, YouTube, Reddit
 
 ## Setup
 
